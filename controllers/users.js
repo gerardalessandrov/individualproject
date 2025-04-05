@@ -4,7 +4,11 @@ const ObjectId = require("mongodb").ObjectId;
 // Obtener todos los usuarios
 const getAll = async (req, res) => {
   try {
-    const result = await mongodb.getDatabase().db().collection("contacts").find();
+    const result = await mongodb
+      .getDatabase()
+      .db()
+      .collection("contacts")
+      .find();
     result.toArray().then((contacts) => {
       res.setHeader("Content-Type", "application/json");
       res.status(200).json(contacts);
@@ -46,17 +50,28 @@ const getSingle = async (req, res) => {
 
 // Crear un nuevo usuario
 const createUser = async (req, res) => {
-  const { name, lastname, gmail, phonenumber, birthday, facebook, instagram } = req.body;
+  const { name, lastname, gmail, phonenumber, birthday, facebook, instagram } =
+    req.body;
 
   // Validación de campos requeridos
-  if (!name || !lastname || !gmail || !phonenumber || !birthday) {
+  if (
+    !name ||
+    !lastname ||
+    !gmail ||
+    !phonenumber ||
+    !birthday ||
+    !facebook ||
+    !instagram
+  ) {
     return res.status(400).json({ message: "Campos requeridos faltantes." });
   }
 
   // Validación de formato de correo electrónico
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
   if (!emailRegex.test(gmail)) {
-    return res.status(400).json({ message: "Formato de correo electrónico inválido." });
+    return res
+      .status(400)
+      .json({ message: "Formato de correo electrónico inválido." });
   }
 
   const user = {
@@ -66,7 +81,7 @@ const createUser = async (req, res) => {
     phonenumber,
     birthday,
     facebook,
-    instagram
+    instagram,
   };
 
   try {
@@ -96,17 +111,28 @@ const updateUser = async (req, res) => {
     return res.status(400).json({ message: "ID de usuario inválido" });
   }
 
-  const { name, lastname, gmail, phonenumber, birthday, facebook, instagram } = req.body;
+  const { name, lastname, gmail, phonenumber, birthday, facebook, instagram } =
+    req.body;
 
   // Validación de campos requeridos
-  if (!name || !lastname || !gmail || !phonenumber || !birthday) {
+  if (
+    !name ||
+    !lastname ||
+    !gmail ||
+    !phonenumber ||
+    !birthday ||
+    !facebook ||
+    !instagram
+  ) {
     return res.status(400).json({ message: "Campos requeridos faltantes." });
   }
 
   // Validación de formato de correo electrónico
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
   if (!emailRegex.test(gmail)) {
-    return res.status(400).json({ message: "Formato de correo electrónico inválido." });
+    return res
+      .status(400)
+      .json({ message: "Formato de correo electrónico inválido." });
   }
 
   const user = {
@@ -116,7 +142,7 @@ const updateUser = async (req, res) => {
     phonenumber,
     birthday,
     facebook,
-    instagram
+    instagram,
   };
 
   try {
