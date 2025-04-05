@@ -1,0 +1,40 @@
+# GET http://localhost:3001/users
+
+
+# GET http://localhost:3001/users/67f17ba52519e8f12b966e5c
+
+
+POST http://localhost:3001/users HTTP/1.1
+
+{
+  "name": "Josess",
+  "lastname": "Ruiz",
+  "gmail": "joseruiz@gmail.com",
+  "phonenumber": "973484568",
+  "birthday": "November,26",
+  "facebook": "Jose Ruiz",
+  "instagram": "Jose"
+ }
+
+# PUT  http://localhost:3001/users/67f17bbb2519e8f12b966e5d  HTTP/1.1
+
+# {
+#    "name": "Carl",
+#     "lastname": "Vigo",
+#     "gmail": "gerardvigo@gmail.com",
+#     "phonenumber": "973474568",
+#      "birthday": "September,26",
+#     "facebook": "Gerard Vigo",
+#     "instagram": "gerard-rodrigues"
+# }
+
+# DELETE http://localhost:3001/users/67f17bbb2519e8f12b966e5d  HTTP/1.1
+# {
+#    "name": "Carl",
+#     "lastname": "Vigo",
+#     "gmail": "gerardvigo@gmail.com",
+#     "phonenumber": "973474568",
+#      "birthday": "September,26",
+#     "facebook": "Gerard Vigo",
+#     "instagram": "gerard-rodrigues"
+# }
