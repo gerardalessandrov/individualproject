@@ -41,7 +41,7 @@
                 "name": {
                   "example": "any"
                 },
-                "lastName": {
+                "lastname": {
                   "example": "any"
                 },
                 "gmail": {
@@ -109,7 +109,7 @@
                 "name": {
                   "example": "any"
                 },
-                "lastName": {
+                "lastname": {
                   "example": "any"
                 },
                 "gmail": {
