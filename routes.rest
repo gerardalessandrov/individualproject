@@ -1,33 +1,34 @@
 # GET http://localhost:3001/users
 
 
-# GET http://localhost:3001/users/67f17ba52519e8f12b966e5c
+# GET http://localhost:3001/users2/67f6ad92da75bbb3c10a5a39
 
 
 POST http://localhost:3001/users HTTP/1.1
 
 {
-  "name": "Josess",
-  "lastname": "Ruiz",
-  "gmail": "joseruiz@gmail.com",
-  "phonenumber": "973484568",
-  "birthday": "November,26",
-  "facebook": "Jose Ruiz",
-  "instagram": "Jose"
- }
+    "name": "Juan",
+    "lastname": "Ramirez",
+    "gmail": "juanramirez@gmail.com",
+    "phonenumber": "943184568",
+    "birthday": "February,2",
+    "facebook": "Juan Ramirez",
+    "instagram": "Juan"
+}
 
-# PUT  http://localhost:3001/users/67f17bbb2519e8f12b966e5d  HTTP/1.1
+
+
+# PUT  http://localhost:3001/users2/67f17bbb2519e8f12b966e5d  HTTP/1.1
 
 # {
-#    "name": "Carl",
-#     "lastname": "Vigo",
-#     "gmail": "gerardvigo@gmail.com",
-#     "phonenumber": "973474568",
-#      "birthday": "September,26",
-#     "facebook": "Gerard Vigo",
-#     "instagram": "gerard-rodrigues"
-# }
-
+#    "card_number":"987542921788",
+#    "cardholder_name": "Jane Smith ",
+#    "expiration_date": "24-05-25",
+#    "security_code": "456",
+#    "issuer": "Chase Bank",
+#    "card_type": "Mastercard",
+#    "credit_limit": 10000
+#  }
 # DELETE http://localhost:3001/users/67f17bbb2519e8f12b966e5d  HTTP/1.1
 # {
 #    "name": "Carl",
