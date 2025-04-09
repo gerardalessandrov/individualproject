@@ -7,7 +7,7 @@
   },
   "host": "individual-project-z6e9.onrender.com",
   "basePath": "/",
-  "schemes": ["https"],
+  "schemes": ["http"],
   "paths": {
     "/": {
       "get": {
