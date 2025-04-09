@@ -1,14 +1,57 @@
 const express = require("express");
 const router = express.Router();
 const usersController = require("../controllers/users");
+const { body, validationResult } = require("express-validator");
 
 router.get("/", usersController.getAll);
 
 router.get("/:id", usersController.getSingle);
 
-router.post("/", usersController.createUser);
+// POST route to create a new user with validations
+router.post(
+  "/",
+  [
+    body("name").isLength({ min: 1 }).withMessage("Name is required."),
+    body("lastname").isLength({ min: 1 }).withMessage("Lastname is required."),
+    body("gmail").isEmail().withMessage("A valid email address is required."),
+    body("phonenumber")
+      .isMobilePhone()
+      .withMessage("A valid phone number is required."),
+    body("birthday").isDate().withMessage("A valid birthdate is required."),
+    // Add more validations as needed
+  ],
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    next();
+  },
+  usersController.createUser
+);
 
-router.put("/:id", usersController.updateUser);
+// PUT route to update an existing user with validations
+router.put(
+  "/:id",
+  [
+    body("name").isLength({ min: 1 }).withMessage("Name is required."),
+    body("lastname").isLength({ min: 1 }).withMessage("Lastname is required."),
+    body("gmail").isEmail().withMessage("A valid email address is required."),
+    body("phonenumber")
+      .isMobilePhone()
+      .withMessage("A valid phone number is required."),
+    body("birthday").isDate().withMessage("A valid birthdate is required."),
+    // Add more validations as needed
+  ],
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    next();
+  },
+  usersController.updateUser
+);
 
 router.delete("/:id", usersController.deleteUser);
 module.exports = router;

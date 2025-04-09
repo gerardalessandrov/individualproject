@@ -6,7 +6,7 @@ const getAll = async (req, res) => {
     const result = await mongodb
       .getDatabase()
       .db()
-      .collection("contacts")
+      .collection("cardinformation")
       .find();
     result.toArray().then((contacts) => {
       res.setHeader("Content-Type", "application/json");
@@ -27,15 +27,15 @@ const getSingle = async (req, res) => {
     const result = await mongodb
       .getDatabase()
       .db()
-      .collection("contacts")
+      .collection("cardinformation")
       .find({ _id: userId });
 
-    result.toArray().then((contacts) => {
-      if (contacts.length === 0) {
+    result.toArray().then((cardinformation) => {
+      if (cardinformation.length === 0) {
         return res.status(404).json({ message: "User not found" });
       }
       res.setHeader("Content-Type", "application/json");
-      res.status(200).json(contacts[0]);
+      res.status(200).json(cardinformation[0]);
     });
   } catch (error) {
     console.error("Error fetching user:", error);
@@ -46,32 +46,47 @@ const getSingle = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  const { name, lastname, gmail, phonenumber, birthday, facebook, instagram } =
-    req.body;
+  const {
+    card_number,
+    cardholder_name,
+    expiration_date,
+    security_code,
+    issuer,
+    card_type,
+    credit_limit,
+  } = req.body;
 
   // Validación de campos requeridos
-  if (!name || !lastname || !gmail || !phonenumber || !birthday) {
+  if (
+    !card_number ||
+    !cardholder_name ||
+    !expiration_date ||
+    !security_code ||
+    !issuer ||
+    !card_type ||
+    !credit_limit
+  ) {
     return res.status(400).json({
       message:
-        "Fields 'name', 'lastname', 'gmail', 'phonenumber', and 'birthday' are required.",
+        "Todos los campos son obligatorios: 'card_number', 'cardholder_name', 'expiration_date', 'security_code', 'issuer', 'card_type', 'credit_limit'.",
     });
-  
+  }
 
   const user = {
-    name,
-    lastname,
-    gmail,
-    phonenumber,
-    birthday,
-    facebook,
-    instagram,
+    card_number,
+    cardholder_name,
+    expiration_date,
+    security_code,
+    issuer,
+    card_type,
+    credit_limit,
   };
 
   try {
     const response = await mongodb
       .getDatabase()
       .db()
-      .collection("contacts")
+      .collection("cardinformation")
       .insertOne(user);
 
     if (response.acknowledged) {
@@ -87,37 +102,50 @@ const createUser = async (req, res) => {
       .status(500)
       .json({ message: "An error occurred while creating the user." });
   }
-}
 };
 
 const updateUser = async (req, res) => {
   const userId = new ObjectId(req.params.id);
-  const { name, lastname, gmail, phonenumber, birthday, facebook, instagram } =
-    req.body;
+  const {
+    card_number,
+    cardholder_name,
+    expiration_date,
+    security_code,
+    issuer,
+    card_type,
+    credit_limit,
+  } = req.body;
 
   // Validación de campos requeridos
-  if (!name || !lastname || !gmail || !phonenumber || !birthday) {
+  if (
+    !card_number ||
+    !cardholder_name ||
+    !expiration_date ||
+    !security_code ||
+    !issuer ||
+    !card_type ||
+    !credit_limit
+  ) {
     return res.status(400).json({
       message:
-        "Fields 'name', 'lastname', 'gmail', 'phonenumber', and 'birthday' are required.",
+        "Todos los campos son obligatorios: 'card_number', 'cardholder_name', 'expiration_date', 'security_code', 'issuer', 'card_type', 'credit_limit'.",
     });
   }
-
   const user = {
-    name,
-    lastname,
-    gmail,
-    phonenumber,
-    birthday,
-    facebook,
-    instagram,
+    card_number,
+    cardholder_name,
+    expiration_date,
+    security_code,
+    issuer,
+    card_type,
+    credit_limit,
   };
 
   try {
     const response = await mongodb
       .getDatabase()
       .db()
-      .collection("contacts")
+      .collection("cardinformation")
       .replaceOne({ _id: userId }, user);
 
     if (response.modifiedCount > 0) {
@@ -132,7 +160,6 @@ const updateUser = async (req, res) => {
       .json({ message: "An error occurred while updating the user." });
   }
 };
-
 const deleteUser = async (req, res) => {
   const userId = new ObjectId(req.params.id);
 
@@ -140,7 +167,7 @@ const deleteUser = async (req, res) => {
     const response = await mongodb
       .getDatabase()
       .db()
-      .collection("contacts")
+      .collection("cardinformation")
       .deleteOne({ _id: userId });
 
     if (response.deletedCount > 0) {
