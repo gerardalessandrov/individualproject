@@ -8,7 +8,8 @@ router.get("/", usersController.getAll);
 router.get("/:id", usersController.getSingle);
 
 router.post(
-  "/",isAuthenticated,
+  "/",
+  isAuthenticated,
   [
     body("card_number")
       .isLength({ min: 1 })
@@ -51,7 +52,8 @@ router.post(
 
 // PUT route to update an existing user with validations
 router.put(
-  "/:id",isAuthenticated,
+  "/:id",
+  isAuthenticated,
   [
     body("card_number")
       .isLength({ min: 1 })
@@ -92,5 +94,5 @@ router.put(
   usersController.updateUser
 );
 
-router.delete("/:id",isAuthenticated,usersController.deleteUser);
+router.delete("/:id", isAuthenticated, usersController.deleteUser);
 module.exports = router;
