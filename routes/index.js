@@ -1,7 +1,7 @@
 const passport = require("passport");
 const router = require("express").Router();
 router.use("/", require("./swagger"));
-router.get("/", (req, res) => 
+router.get("/", (req, res) => {
   res.send("Logged out");
 });
 router.use("/users", require("./users"));
